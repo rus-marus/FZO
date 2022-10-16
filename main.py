@@ -3,6 +3,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 import psycopg2
 from UserLogin import UserLogin
 from DataBase import DataBase
+from tables import Results
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
@@ -72,10 +73,32 @@ def login():
 @login_required
 def index():
     if request.method == "POST":
-         if request.form['login'] == "exit":
+         if request.form['menu'] == "Выйти":
             logout_user()
             return redirect(url_for("login"))
+         elif request.form['menu'] == "Просмотр анкет":
+            return  redirect(url_for('abiturients'))
     return render_template("menu.html", title='Меню')
+
+
+@app.route('/abiturients', methods=['POST', 'GET'])
+@login_required
+def abiturients():
+    abiturients_data = dbase.getInfo()
+    if not abiturients_data:
+        flash('Абитуриенты не найдены')
+    else:
+        # display results
+        table = Results(abiturients_data)
+        table.border = True
+        return render_template('view.html', table=table)
+
+
+@app.route('/abiturient/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    abiturient = dbase.getAbiturient(id)
+    return render_template('abiturient.html', abiturient = abiturient)
 
 if __name__ == "__main__":
     app.run(debug=True)
