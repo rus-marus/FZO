@@ -89,9 +89,9 @@ def abiturients():
         flash('Абитуриенты не найдены')
     else:
         # display results
-        table = Results(abiturients_data)
-        table.border = True
-        return render_template('view.html', table=table)
+        # table = Results(abiturients_data)
+        # table.border = True
+        return render_template('view.html', abiturients=abiturients_data)
 
 
 @app.route('/abiturient/<int:id>', methods=['GET', 'POST'])
@@ -99,6 +99,13 @@ def abiturients():
 def edit(id):
     abiturient = dbase.getAbiturient(id)
     return render_template('abiturient.html', abiturient = abiturient)
+
+@app.route('/api/data')
+def data():
+    abiturients_data = dbase.getInfo()
+    for ab in range(0, len(abiturients_data),+1):
+        abiturients_data[ab]['url'] = '<a href="/abiturient/' + str(abiturients_data[ab]['id']) + '">Изменить</a></td>'
+    return {'data': abiturients_data}
 
 if __name__ == "__main__":
     app.run(debug=True)
