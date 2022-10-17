@@ -8,6 +8,7 @@ class UserLogin(UserMixin):
 
     def create(self, user):
         self.__user = user
+        self.__user['id'] = user['id']
         return self
 
     def get_id(self):

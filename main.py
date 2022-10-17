@@ -3,7 +3,6 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 import psycopg2
 from UserLogin import UserLogin
 from DataBase import DataBase
-from tables import Results
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
@@ -23,7 +22,6 @@ def connect_db():
 
 @login_manager.user_loader
 def load_user(user_id):
-    print('load_user')
     return UserLogin().fromDB(user_id, dbase)
 
 def get_db():
@@ -51,7 +49,12 @@ def close_db(eror):
 
 
 # нужно уходить от использования одной страницы,т.к. код всего сайта будет забит в одном методе - а это шляпа
-# тогда сделаем основную страницу - главным меню, но если пользователь не авторизован, то перекидываем его на /loginё
+# тогда сделаем основную страницу - главным меню, но если пользователь не авторизован, то перекидываем его на /login
+
+@app.route('/logout', methods=['POST', 'GET'])
+def logout():
+    logout_user()
+    return redirect(url_for("login"))
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
@@ -80,31 +83,27 @@ def index():
             return  redirect(url_for('abiturients'))
     return render_template("menu.html", title='Меню')
 
-
 @app.route('/abiturients', methods=['POST', 'GET'])
 @login_required
 def abiturients():
-    abiturients_data = dbase.getInfo()
-    if not abiturients_data:
-        flash('Абитуриенты не найдены')
-    else:
-        # display results
-        # table = Results(abiturients_data)
-        # table.border = True
-        return render_template('view.html', abiturients=abiturients_data)
+    return render_template('view.html')
 
 
 @app.route('/abiturient/<int:id>', methods=['GET', 'POST'])
 @login_required
-def edit(id):
-    abiturient = dbase.getAbiturient(id)
+def edit():
+    abiturient = dbase.getAbiturient()
     return render_template('abiturient.html', abiturient = abiturient)
 
 @app.route('/api/data')
+@login_required
 def data():
-    abiturients_data = dbase.getInfo()
+    id = session['_user_id']
+    complect = dbase.getComplect(id=id)['complect']
+    abiturients_data = dbase.getInfo(complect)
     for ab in range(0, len(abiturients_data),+1):
-        abiturients_data[ab]['url'] = '<a href="/abiturient/' + str(abiturients_data[ab]['id']) + '">Изменить</a></td>'
+        abiturients_data[ab]['url'] = '<a href="/abiturient/' + str(abiturients_data[ab]['id_abiturient']) + '">Изменить</a></td>'
+
     return {'data': abiturients_data}
 
 if __name__ == "__main__":

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a2f5a9d2-0f04-45f9-8a19-9c57407b5c47" name="Changes" comment="Работает, но нельзя будет стилизовать таблицу">
+    <list default="true" id="a2f5a9d2-0f04-45f9-8a19-9c57407b5c47" name="Changes" comment="Сделал таблицу с ссылками на редактирование">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserLogin.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserLogin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tables.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +40,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "full.screen.before.presentation.mode": "false",
     "last_opened_file_path": "C:/Users/Jigan/Desktop/Education/FZO 2.0/templates",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+    "settings.editor.selected.configurable": "debugger.dataViews.python.type.renderers"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -100,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665932661705</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Сделал таблицу с ссылками на редактирование">
+      <created>1665937114506</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1665937114506</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -117,6 +126,23 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add files" />
     <MESSAGE value="Работает, но нельзя будет стилизовать таблицу" />
-    <option name="LAST_COMMIT_MESSAGE" value="Работает, но нельзя будет стилизовать таблицу" />
+    <MESSAGE value="Сделал таблицу с ссылками на редактирование" />
+    <option name="LAST_COMMIT_MESSAGE" value="Сделал таблицу с ссылками на редактирование" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../flasksite-16-master/UserLogin.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../flasksite-16-master/UserLogin.py</url>
+          <line>9</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

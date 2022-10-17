@@ -7,9 +7,17 @@
   <table id="data" class="table table-striped">
     <thead>
       <tr>
+        <th>Специальность</th>
         <th>Фамилия</th>
         <th>Имя</th>
         <th>Отчество</th>
+        <th>Дата рождения</th>
+        <th>Звание</th>
+        <th>КО</th>
+        <th>Место службы</th>
+        <th>Номер группы</th>
+        <th>Номер телефона</th>
+        <th>Достижения</th>
         <th>Редактирование</th>
       </tr>
     </thead>
@@ -23,9 +31,17 @@
       $('#data').DataTable({
         ajax: '/api/data',
         columns: [
-          {data: 'fam'},
-          {data: 'name'},
-          {data: 'father_name'},
+          {data: 'speciality_a'},
+          {data: 'surname_a'},
+          {data: 'name_a'},
+          {data: 'midname_a'},
+          {data: 'data_birth_a'},
+          {data: 'zvanie'},
+          {data: 'complect'},
+          {data: 'place_service'},
+          {data: 'group_number_a'},
+          {data: 'phone_number'},
+          {data: 'individual'},
           {data: 'url'}
         ],
       });

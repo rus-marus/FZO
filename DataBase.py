@@ -9,7 +9,7 @@ class DataBase:
     # Сделать универсальный метод, который будет выдавать res по sql запросу, который передается в функцию, и 1 или 0 для выбора fetchone или fetchall
     def get_User(self, user_id):
         try:
-            self.cur.execute(f"SELECT * FROM users WHERE id = {user_id} LIMIT 1")
+            self.cur.execute(f"SELECT * FROM users WHERE id = {user_id}")
 
             res = self.__cur.fetchone()
             if not res:
@@ -33,12 +33,28 @@ class DataBase:
             print("Ошибка получения данных из БД ")
 
         return False
-    def getInfo(self):
+
+    def getComplect(self, id):
         try:
-            self.__cur.execute(f"SELECT * FROM abiturients")
+            self.__cur.execute(f"SELECT * FROM users WHERE id = {int(id)}")
+
+            res = self.__cur.fetchone()
+            if not res:
+                return False
+
+            return res
+        except ValueError:
+            print('Ошибка получения данных из БД' + ValueError)
+
+        return False
+    def getInfo(self, complect):
+        try:
+            if complect == '':
+                self.__cur.execute(f"SELECT * FROM abiturients")
+            else:
+                self.__cur.execute(f"SELECT * FROM abiturients WHERE complect = '{complect}'")
             res = self.__cur.fetchall()
             if not res:
-                print("Таблица абитуриентов пустая")
                 return False
 
             return res
@@ -51,7 +67,6 @@ class DataBase:
             self.__cur.execute(f"SELECT * FROM users WHERE login = '{login}' LIMIT 1")
             res = self.__cur.fetchone()
             if not res:
-                print("Пользователь не найден")
                 return False
 
             return res
