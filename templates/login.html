@@ -1,12 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
 {{ super() }}
-{% for cat, msg in get_flashed_messages(True) %}
-<div class="flash {{cat}}">{{msg}}</div>
-{% endfor %}
+<header>
+	<div class="header">
+		<div class="center-pic">
+			<img class="center-pic" src="{{url_for('static', filename='img/gerb.png')}}" alt="">
+		</div>
+		<div class="ynik">
+		   <h1 class="ynik">Московский университет Министерства внутренних дел Российской Федерации имени В.Я. Кикотя</h1>
+		<div>
+	</div>
+</header>
 <form action="" method="post" class="form-contact">
-<label>Логин: </label> <input type="text" name="login" value="" required />
-<label>Пароль: </label> <input type="password" name="password" value="" required />
-<input type="submit" value="Войти" />
+		<h1 class="nazvanie">Факультет заочного обучения</h1>
+		<section>
+			<div class="panelvhoda">
+				<div class="col-12">
+					<h2 class="nazvanie">Вход в систему</h2>
+
+					<div class="login">
+						<input type="text" name="login" placeholder="Введите логин..." value="" required />
+					</div>
+
+					<div class="password">
+						<input type="password" id="password-input" placeholder="Введите пароль..." name="password" value="" required />
+                        </input>
+					</div>
+					<nav class="buttonvhod">
+						<input class="vhod" type="submit" value="Войти" />
+					</nav>
+					<br>
+					<script src="{{url_for('static', filename='js/vhod.js')}}"></script>
+				</div>
+			</div>
+		</section>
 </form>
+	<footer>
+	</footer>
 {% endblock %}

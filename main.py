@@ -3,6 +3,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 import psycopg2
 from UserLogin import UserLogin
 from DataBase import DataBase
+import os
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
@@ -55,6 +56,7 @@ def close_db(eror):
 def logout():
     logout_user()
     return redirect(url_for("login"))
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
@@ -65,28 +67,24 @@ def login():
         if user and request.form['password'] == '123':
             userlogin = UserLogin().create(user)
             login_user(userlogin)
-            # return redirect(request.args.get("next") or url_for("menu"))
             return redirect(url_for('index'))
         flash("Неверная пара логин/пароль", "error")
 
     return render_template("login.html", title='Авторизация в системе')
 
+def get_complect():
+    id = session['_user_id']
+    return dbase.getComplect(id=id)['complect']
 
 @app.route('/', methods=['POST', 'GET'])
 @login_required
 def index():
-    if request.method == "POST":
-         if request.form['menu'] == "Выйти":
-            logout_user()
-            return redirect(url_for("login"))
-         elif request.form['menu'] == "Просмотр анкет":
-            return  redirect(url_for('abiturients'))
-    return render_template("menu.html", title='Меню')
+    return render_template("menu.html", title='Меню', complect=get_complect())
 
 @app.route('/abiturients', methods=['POST', 'GET'])
 @login_required
 def abiturients():
-    return render_template('view.html')
+    return render_template('view.html', complect=get_complect())
 
 
 @app.route('/abiturient/<int:id>', methods=['GET', 'POST'])
@@ -98,9 +96,7 @@ def edit():
 @app.route('/api/data')
 @login_required
 def data():
-    id = session['_user_id']
-    complect = dbase.getComplect(id=id)['complect']
-    abiturients_data = dbase.getInfo(complect)
+    abiturients_data = dbase.getInfo(get_complect())
     for ab in range(0, len(abiturients_data),+1):
         abiturients_data[ab]['url'] = '<a href="/abiturient/' + str(abiturients_data[ab]['id_abiturient']) + '">Изменить</a></td>'
 

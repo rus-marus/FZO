@@ -1,25 +1,44 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css">
-    {% block title -%}
-    {% if title %}
-        <title>{{title}}</title>
-    {% else %}
-        <title>FZO</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='img/gerb.png')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    {% if title !='Авторизация в системе' %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% endif %}
+    {% block title %}
+        <title>{{title}}</title>
     {% endblock %}
+    {% block styles %}{% endblock %}
 </head>
 <body>
+{% block header %}
+<header>
+    {% if title !='Авторизация в системе' %}
+    <nav>
+        <ul>
+            <li class="home"><a href="{{ url_for('index') }}" class="active"><i class="material-icons">home</i></a></li>
+            <li><a href="{{ url_for('abiturients') }}">Просмотр заявок</a></li>
+            <li><a href="">Создать/изменить анкету</a></li>
+        {% if complect == '' %}
+            <li><a href="">План комплектования</a></li>
+            <li><a href="">Новый год набора</a></li>
+            <li><a href="">Отчеты</a></li>
+            <li class="fzo">ФЗО</li>
+        {% else %}
+            <li class="null"><a href=""></a></li>
+            <li class="ter">{{ complect }}</li>
+        {% endif %}
+            <li class="exit"><a href="{{ url_for('logout') }}"><i class="material-icons">exit_to_app</i></a></li>
+        </ul>
+    </nav>
+    {% endif %}
+</header>
+{% endblock %}
 {% block content -%} {% endblock -%}
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
-    {% block scripts %}{% endblock %}
+{% block scripts %}{% endblock %}
 </body>
 </html>
