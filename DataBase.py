@@ -5,7 +5,6 @@ class DataBase:
         self.__db = db
         self.__cur = db.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
 
-
     # Сделать универсальный метод, который будет выдавать res по sql запросу, который передается в функцию, и 1 или 0 для выбора fetchone или fetchall
     def get_User(self, user_id):
         try:

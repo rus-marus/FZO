@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 
+
 class UserLogin(UserMixin):
 
     def fromDB(self, user_id, db): #используется при создании декоратора load_user, чтобы передать данные из декоратора в UserLogin
